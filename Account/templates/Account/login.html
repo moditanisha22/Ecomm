@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+  {%load bootstrap4%}
+  <div class="container">
+      <div class="jumbotron">
+          <form action="" method="post">
+              {% csrf_token %}
+              {%bootstrap_form form%}
+              <input type="submit" value="CLICK HERE">
+          </form>
+      </div>
+  </div>
+{% endblock content %}
