@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container ctr">
+  {% if user.cart.all %}
+  {% for p in user.cart.all %}
+  <div class="card crd">
+      <img class="img-top"  src="{{p.product.product_picture.url}}" alt="">
+
+      <div class="card-body body">
+          <h5 class="card-title title">{{p.product.product_name}}</h5>
+         
+          <div class="card-footer footer">
+              
+              <h3><span>Rs.{{p.product.product_price}}</span></h3>
+              <a class="btn btn-fluid btn-warning" href="{% url 'shop:create_product'  slug=p.product.slug %}">Buy Now</a>
+              <a class="btn btn-fluid btn-info" href="{% url 'shop:remove_from_cart' slug=p.product.slug %}">Remove</a>
+
+          </div>
+      </div>
+  </div>
+{% endfor %}
+
+  
+
+      {% else %}
+      <h2>Soory There is product in your cartlist</h2>
+  {% endif %}
+  </div>      
+{% endblock content %}

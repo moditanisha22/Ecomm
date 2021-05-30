@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .footerr{
+        display: none;
+        height: 40px !important;
+        padding: 5px;
+    }
+ 
+   .crd:hover .footerr{
+    display: flex;
+   }
+
+   .ctr
+{
+display: flex; 
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: center;
+
+
+}
+   
+</style>
+<div style="display: flex;justify-content: space-around; height: 30vh;">
+<div data-aos="fade-right">
+    <h1 class="text-center;">Filters</h1>
+    <form action="{%url 'shop:searchquery'%}" method="get">
+        <label for="jeans">Filter By jeans</label>
+        <input type="radio" name="product" id="jeans" value="jeans">
+        <div></div>
+        <label for="top">Filter By Top</label>
+        <input type="radio" name="product" id="top" value="top">
+        <div></div>
+        <label for="shirt">Filter By shirt</label>
+        <input type="radio" name="product" id="shirt" value="shirt">
+        <div></div>
+       <input type="submit" class="btn btn-primary btn-lg btn-fluid" value="Filter">
+    </form>
+</div>
+<div style="height:100vh">
+<div  class="container ctr">
+      
+    {% if list %}
+        {% for product in list %}
+          <div data-aos="fade-up-right" class="card crd">
+              <img class="img-top"  src="{{product.product_picture.url}}" alt="">
+      
+              <div class="card-body body">
+                  <h5 class="card-title title">{{product.product_name}}</h5>
+                 
+                  <div class="card-footer footerr">
+                      <a class="btn btn-fluid btn-warning" href="{%url 'shop:addtocart' slug=product.slug%}">Add to Cart</a>
+                      <a class="btn btn-fluid btn-success" href="{% url 'shop:create_product' slug=product.slug %}">Buy Now</a>
+                      <h3><span>Rs.{{product.product_price}}</span></h3>
+                  </div>
+              </div>
+          </div>
+        {% endfor %}
+   
+</div>
+{%else%}
+<div style="width: 100%;" class="div-head">
+    <h1 class="text-center">Top</h1>
+</div>
+
+  <div  class="container ctr">
+      
+      {% if top %}
+          {% for product in top %}
+            <div data-aos="flip-right" class="card crd">
+                <img class="img-top"  src="{{product.product_picture.url}}" alt="">
+        
+                <div class="card-body body">
+                    <h5 class="card-title title">{{product.product_name}}</h5>
+                   
+                    <div class="card-footer footerr">
+                        <a class="btn btn-fluid btn-warning" href="{%url 'shop:addtocart' slug=product.slug%}">Add to Cart</a>
+                        <a class="btn btn-fluid btn-success" href="{% url 'shop:create_product' slug=product.slug %}">Buy Now</a>
+                        <h3><span>Rs.{{product.product_price}}</span></h3>
+                    </div>
+                </div>
+            </div>
+          {% endfor %}
+      {% endif %}
+  </div>
+  <div style="width: 100%;" class="div-head">
+  <h1 class="text-center">T-Shirts and Shirts</h1></div>
+  <div  class="container ctr">
+      
+      {% if shirt %}
+          {% for product in shirt %}
+            <div data-aos="flip-right" class="card crd">
+                <img class="img-top"  src="{{product.product_picture.url}}" alt="">
+        
+                <div class="card-body body">
+                    <h5 class="card-title title">{{product.product_name}}</h5>
+                   
+                    <div class="card-footer footerr">
+                        <a class="btn btn-fluid btn-warning" href="{%url 'shop:addtocart' slug=product.slug%}">Add to Cart</a>
+                        <a class="btn btn-fluid btn-success" href="{% url 'shop:create_product' slug=product.slug %}">Buy Now</a>
+                        <h3><span>Rs.{{product.product_price}}</span></h3>
+                    </div>
+                </div>
+            </div>
+          {% endfor %}
+      {% endif %}
+      </div>
+      <div style="width: 100%;" class="div-head">
+      <h1 class="text-center">Jeans</h1></div>
+      <div style="margin-bottom: 50px;" class="container ctr">
+     
+      {% if jeans %}
+          {% for product in jeans %}
+            <div  data-aos="flip-left" class="card crd">
+                <img class="img-top"  src="{{product.product_picture.url}}" alt="">
+        
+                <div class="card-body body">
+                    <h5 class="card-title title">{{product.product_name}}</h5>
+                   
+                    <div class="card-footer footerr">
+                        <a class="btn btn-fluid btn-warning" href="{%url 'shop:addtocart' slug=product.slug%}">Add to Cart</a>
+                        <a class="btn btn-fluid btn-success" href="{% url 'shop:create_product' slug=product.slug %}">Buy Now</a>
+                        <h3><span>Rs.{{product.product_price}}</span></h3>
+                    </div>
+                </div>
+            </div>
+          {% endfor %}
+      {% endif %}
+    
+          
+  </div>
+  </div>
+</div>
+  {%endif%}
+  {% endblock content %}
+  
